@@ -41,6 +41,19 @@ function nort0n_main_nav_fallback() {
 	));
 }
 
+add_filter( 'nort0n_nav_menu_link_attributes', 'add_class_to_items_link', 10, 3 );
+
+function nort0n_add_class_to_items_link( $atts, $item, $args ) {
+	// check if the item has children
+	$hasChildren = (in_array('menu-item-has-children', $item->classes));
+	if ($hasChildren) {
+	  // add the desired attributes:
+	  $atts['data-toggle'] = 'sub-menu';
+	  $atts['ahref'] = '#';
+	}
+	return $atts;
+  }
+
 // Footer Fallback Menu
 function nort0n_footer_links_fallback() {
 	/* You can put a default here if you like */
